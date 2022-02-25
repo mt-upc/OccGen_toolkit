@@ -6,12 +6,12 @@ import sys
 import os
 import re
 
-def readJSON(file):
+def read_json(file):
 	with open(file) as f:
 		json_file = json.load(f)
 	return json_file
 
-def writeTextFile(file, data):
+def write_text_file(file, data):
 	with open(file, 'a') as f:
 		for sentence in data:
 			if sentence != '' and sentence != "\n": f.write(sentence.strip() + "\n")
@@ -32,7 +32,7 @@ def tokenization(sentence, lg):
 	
 	return sentences
 
-def languageDetection(sentence, lg, text):
+def language_detection(sentence, lg, text):
 	langauge_detected = cld3.get_language(sentence).language
 	# Language detection constraint
 	if language == langauge_detected:
@@ -49,7 +49,7 @@ def main(input_path, output_path):
 	# ar_tokenizer = ar_split.CoreNLPTokenizer()
 
 	for file in files:
-		occupation = readJSON(file)
+		occupation = read_json(file)
 
 		for entity in occupation:
 
@@ -69,9 +69,9 @@ def main(input_path, output_path):
 					sentences = tokenization(sentence, language)
 
 					for sentence in sentences:
-						text = languageDetection(sentence, language, text)
+						text = language_detection(sentence, language, text)
 
 				try:
-					writeTextFile(output_path + entity + "/" + language + ".txt", text)
+					write_text_file(output_path + entity + "/" + language + ".txt", text)
 				except:
 					break

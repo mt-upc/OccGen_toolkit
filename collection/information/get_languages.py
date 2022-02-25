@@ -20,21 +20,21 @@ def parse(response, wikidata_id):
 
 	return languages
 
-def getLanguages(wikidata_id):
+def get_languages(wikidata_id):
 	response = requests.get(endpoint_url + wikidata_id)
 	response_json = response.json()
-
+	print(response_json)
 	return parse(response_json, wikidata_id)
 
 def main(data_path):
 	files = glob.glob(data_path + "*.json")
 	for file in files:
-		data = utils.readJSON(file)
+		data = utils.read_json(file)
 
 		for occupation in data:
 			entities = data[occupation]
+			print(entities)
 			for entity in entities:
-				entities[entity]["languages"] = getLanguages(entity)
+				entities[entity]["languages"] = get_languages(entity)
 
-			utils.writeJSON2File(file, data)
-			break
+			utils.write_json_2_file(file, data)

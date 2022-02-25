@@ -24,14 +24,14 @@ VALUES(?predicate) {(property:P106)}
 
 # saving the results in dictionary in case we need easy access some time later
 # a json file is saved for each entity
-def getResultsEntity(occupations, write_path):
+def get_results_entity(occupations, write_path):
 
 	for occupation_id, occupation_name in occupations:
 		rdf_dict = {}
 
 		occupation_query = query.replace("REPLACE", occupation_id)
 		try:
-			rdf = utils.getResults(endpoint_url, occupation_query)
+			rdf = utils.get_results(endpoint_url, occupation_query)
 			rdf_dict[occupation_name] = {}
 
 			for entity in rdf['results']['bindings']:
@@ -44,11 +44,11 @@ def getResultsEntity(occupations, write_path):
 		except:
 			continue
 
-		utils.writeJSON2File(write_path + occupation_id + ".json", rdf_dict)
+		utils.write_json_2_file(write_path + occupation_id + ".json", rdf_dict)
 		break
 
-def getOccupationsRelatedEntities(read_path):
-	data = utils.readJSON(read_path)
+def get_occupations_related_entities(read_path):
+	data = utils.read_json(read_path)
 
 	occupations =[]
 	for entry in data:
@@ -59,8 +59,8 @@ def getOccupationsRelatedEntities(read_path):
 	return occupations
 
 def main(read_path, write_path):
-	occupations = getOccupationsRelatedEntities(read_path)
-	getResultsEntity(occupations, write_path)
+	occupations = get_occupations_related_entities(read_path)
+	get_results_entity(occupations, write_path)
 
 
 

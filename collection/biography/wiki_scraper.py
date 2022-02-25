@@ -9,18 +9,18 @@ import sys
 import re
 
 
-def loadJSONFile(url):
+def load_json_file(url):
 	f = open(url,)
 	data = json.load(f)
 	return data
 
-def writeJSON2File(file, data):
+def write_json_2_file(file, data):
 	with open(file, 'w', encoding='utf8') as outfile:
 		json.dump(data, outfile, ensure_ascii=False)
 
 
 # TODO: UTF-8 encoding
-def cleanExpression(expresion):
+def clean_expression(expresion):
 	expresion = re.sub("[\(].*?[\)]", "", expresion)
 	expresion = re.sub("[\[].*?[\]]", "", expresion)
 
@@ -33,19 +33,19 @@ def cleanExpression(expresion):
 	return expresion
 
 # return the text in a list of paragraphs
-def getWikiIntro(soup):
+def get_wiki_intro(soup):
 
 	intro_text = []
 	paragraphs = 0
 	for paragraph in soup.select('p'):
-		text = paragraph.getText()
-		clean_text = cleanExpression(text)
+		text = paragraph.get_text()
+		clean_text = clean_expression(text)
 		if clean_text != "": intro_text.append(clean_text)
 	
 	return intro_text
 	
 
-def getSoup(url):                                                   # Try/Catch block to prevent Bad Content being processed.
+def get_soup(url):                                                   # Try/Catch block to prevent Bad Content being processed.
 	print(url)
 	try:
 		response = requests.get(url)    
@@ -56,17 +56,17 @@ def getSoup(url):                                                   # Try/Catch 
 		return None                                                 # Return None if the URL could not be processed. The Crawler will understand.
 
 # return the main text content in a wikipedia page given a name
-def getText(url):
-	soup = getSoup(url)
+def get_text(url):
+	soup = get_soup(url)
 	if soup is not None:
-		text = getWikiIntro(soup)
+		text = get_wiki_intro(soup)
 		return text
 	else:
 		return ""
 
 def main(input_path, output_path):
 	# read json file from command line (occ>entity>urls)
-	data = loadJSONFile(input_path)
+	data = load_json_file(input_path)
 
 	for occupation in data:
 		multi_lingual = {}
@@ -74,10 +74,10 @@ def main(input_path, output_path):
 			multi_lingual[entity] = {}
 			time.sleep(2)
 			for language in data[occupation][entity]:
-				text = getText(language)
+				text = get_text(language)
 				multi_lingual[entity][language] = text
 		# store json file with occupation (id) as a filename
-		writeJSON2File(output_path + occupation + ".json", multi_lingual)
+		write_json_2_file(output_path + occupation + ".json", multi_lingual)
 
 
 

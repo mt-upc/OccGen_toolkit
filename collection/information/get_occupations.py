@@ -24,5 +24,5 @@ VALUES(?predicate) {(property:P31)}
 
 
 def main(write_path):
-    results = utils.getResults(endpoint_url, query)
-    utils.writeJSON2File(write_path, results["results"]["bindings"])
+    results = utils.get_results(endpoint_url, query)
+    utils.write_json_2_file(write_path, results["results"]["bindings"])

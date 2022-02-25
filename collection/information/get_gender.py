@@ -28,7 +28,7 @@ VALUES(?predicate) {(property:P21)}
 def main(data_path):
     files = glob.glob(data_path + "*.json")
     for file in files:
-        data = utils.readJSON(file)
+        data = utils.read_json(file)
 
         for occupation in data:
             entities = data[occupation]
@@ -37,13 +37,12 @@ def main(data_path):
                 if "gender" not in entities[entity].keys():
                     gender_query = query.replace("REPLACE", entity)
                     try:
-                        response = utils.getResults(endpoint_url, gender_query)
+                        response = utils.get_results(endpoint_url, gender_query)
                         entities[entity]["gender"] = response['results']['bindings'][0]['objectLabel']['value']     # This assumes theres only one triple in the response
                     except:
                         entities[entity]["gender"] = None
 
-            utils.writeJSON2File(file, data)
-            break
+            utils.write_json_2_file(file, data)
 
 if __name__ == '__main__':
     main("data/json/")
