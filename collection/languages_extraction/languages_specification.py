@@ -14,7 +14,6 @@ def if_occ_has_list_lan(languages_in_occ, list_languages):
 
     return occ_has_list
 
-
 # intersection between lists
 def compute_common_entites(occupation, list_languages):
     list_entities = ()
@@ -162,14 +161,8 @@ def get_languages_specified_output(occ_path, list_languages):
     return occ_entities, occ_entities_numbers, occ_entities_common_genders, entities_info_all
 
 
-
-
-
-
-
 # calling in shell
 # $ python3 example.py --list a b c
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
