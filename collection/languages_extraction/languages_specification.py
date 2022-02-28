@@ -1,9 +1,7 @@
-from collection.information import utils
-import numpy as np
+from information import utils
 from functools import reduce
+import numpy as np
 import glob
-import argparse
-
 
 def if_occ_has_list_lan(languages_in_occ, list_languages):
     occ_has_list = True
@@ -13,6 +11,7 @@ def if_occ_has_list_lan(languages_in_occ, list_languages):
             break
 
     return occ_has_list
+
 
 # intersection between lists
 def compute_common_entites(occupation, list_languages):
@@ -28,17 +27,15 @@ def compute_common_entites(occupation, list_languages):
     return list_entities_intersection
 
 
-###gender specifications
-##customized to male and female
-# todo: apply to more than binary
-# we are applying filtering to male and female, it can be extended to genders
+# Gender specifications: customized to male and female
+# TODO: apply to more than binary - we are applying filtering to male and female, it can be extended to genders
 def filter_ln(occupation):
     male_filtered = False
     female_filtered = False
-    if (occupation['male'] == 0):
+    if ("male" in occupation.keys() and occupation['male'] == 0):
         male_filtered = True
 
-    elif (occupation['female'] == 0):
+    elif ("female" in occupation.keys() and occupation['female'] == 0):
         female_filtered = True
 
     return male_filtered, female_filtered
@@ -99,10 +96,10 @@ def get_entities_links(list_languages_wiki, occ_entities, entities_info, write_p
                 if ln[0] in list_languages_wiki:
                     link_list.append(ln[1])
             occ_entity_ln[occ][entity] = link_list
-    utils.writeJSON2File(write_path, occ_entity_ln)
+    utils.write_json_2_file(write_path, occ_entity_ln)
 
 
-# todo, test for monolingual (we never tested for) maybe the intersection fails!
+# TODO: test for monolingual (we never tested for) maybe the intersection fails!
 def get_languages_specified_output(occ_path, list_languages):
     files = glob.glob(occ_path + "*.json")
     occ_languages_all = {}
@@ -112,9 +109,8 @@ def get_languages_specified_output(occ_path, list_languages):
     # we get from this step the occupation with its languages and for each language list of entities
     for file in files:
         occ_name, occ_id = utils.dic_occ_name(file)
-        data = utils.readJSON(file)
-        occupation, occ_languages, occ_languages_entities, gender, entities_info, stats_number = utils.computeLangStats(
-            data)
+        data = utils.read_json(file)
+        occupation, occ_languages, occ_languages_entities, gender, entities_info, stats_number = utils.compute_lang_stats(data)
         if occ_languages:
             occ_languages_all[occ_id] = occ_languages  # source_occ_lan  occ_lan.json
         if occ_languages_entities:
@@ -153,7 +149,7 @@ def get_languages_specified_output(occ_path, list_languages):
 
     print(occ_entities_common_genders)
 
-    # todo:filter with binary
+    # TODO: filter with binary
     occ_entities, occ_entities_numbers, occ_entities_common_genders = filter_unbalanced_occ(occ_entities,
                                                                                             occ_entities_numbers,
                                                                                             occ_entities_common_genders)
@@ -161,23 +157,10 @@ def get_languages_specified_output(occ_path, list_languages):
     return occ_entities, occ_entities_numbers, occ_entities_common_genders, entities_info_all
 
 
-# calling in shell
-# $ python3 example.py --list a b c
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--start_json_path", help="Path to folder with occupations jsons")
-    parser.add_argument("--list_languages", nargs="+", default=["en", "es"])
-    parser.add_argument("--write_path", help="Path to alignment dictionary")
 
-    args = parser.parse_args()
-    read_path = args.start_json_path
-    # list_languages, append every language with wiki for the wiki languages names
-    list_languages = args.list_languages
-    list_languages_wiki = []
-    for lang in list_languages:
-        list_languages_wiki.append(lang + 'wiki')
-    write_path = args.write_path
+def main(input_path, languages, output_path):
+    languages_wiki = [language + "wiki" for language in languages]
+    occ_entities, occ_entities_numbers, occ_entities_common_genders, entities_info = get_languages_specified_output(input_path, languages)
+    get_entities_links(languages_wiki, occ_entities, entities_info, output_path)
 
-    occ_entities, occ_entities_numbers, occ_entities_common_genders, entities_info = get_languages_specified_output(read_path, list_languages)
-    get_entities_links(list_languages_wiki, occ_entities, entities_info, write_path)

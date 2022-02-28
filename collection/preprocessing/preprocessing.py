@@ -16,12 +16,14 @@ def write_text_file(file, data):
 		for sentence in data:
 			if sentence != '' and sentence != "\n": f.write(sentence.strip() + "\n")
 
-def tokenization(sentence, lg):
+def tokenization(sentence, language):
 	sentences = []
 	
 	if language == "sw":
 		sentences = nltk.sent_tokenize(sentence, language="english")
 	elif language == "en":
+		sentences = nltk.sent_tokenize(sentence, language="english")
+	elif language == "es":
 		sentences = nltk.sent_tokenize(sentence, language="english")
 	#TODO: requirements
 	elif language == "af":
@@ -32,7 +34,7 @@ def tokenization(sentence, lg):
 	
 	return sentences
 
-def language_detection(sentence, lg, text):
+def language_detection(sentence, language, text):
 	langauge_detected = cld3.get_language(sentence).language
 	# Language detection constraint
 	if language == langauge_detected:
