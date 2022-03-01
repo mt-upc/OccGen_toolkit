@@ -45,7 +45,6 @@ def get_results_entity(occupations, write_path):
 			continue
 
 		utils.write_json_2_file(write_path + occupation_id + ".json", rdf_dict)
-		break
 
 def get_occupations_related_entities(read_path):
 	data = utils.read_json(read_path)

@@ -121,10 +121,8 @@ def get_languages_specified_output(occ_path, list_languages):
     # compute the intersection of entities among given languages
     for occ in occ_languages_entities_all:
         if occ in list_occ_with_languages:
-            print(occ)
             occ_entities_common_genders[occ] = {}
             intersection = compute_common_entites(occ_languages_entities_all[occ], list_languages)
-            print(intersection)
             if len(intersection) != 0:
                 occ_entities[occ] = intersection
                 # this is to keep track of the number of entities in the occupation
@@ -138,7 +136,6 @@ def get_languages_specified_output(occ_path, list_languages):
 
                 count += 1
 
-    print(occ_entities_common_genders)
 
     # TODO: filter with binary
     occ_entities, occ_entities_numbers, occ_entities_common_genders = filter_unbalanced_occ(occ_entities,
