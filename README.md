@@ -5,6 +5,12 @@
 
 The first step in our pipeline is to extract data from Wikidata along Wikipedia. Mainly, we collect a set of people *(from now on entities)*  with their occupation(s), gender, and Wikipedia links in all available languages. Afterwards, the user can decide which languages are of their interest to adapt the monolingual extraction phase to their needs. 
 
+[**As of now**] To make it run, we just have to execute the following command from the `/collection` directory - within the file you can modify the configuration:
+
+```bash
+python3 manager.py
+```
+
 [**TODO**] To make it run, we just have to execute the following command after configuring `config.json` file with the corresponding paths (*if default configuration isn't desired*):
 
 ```bash
