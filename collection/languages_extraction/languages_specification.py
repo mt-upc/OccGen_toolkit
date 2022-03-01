@@ -41,15 +41,6 @@ def filter_ln(occupation):
     return male_filtered, female_filtered
 
 
-def min_male_female(occupation):
-    min_value = ''
-    if occupation['male'] > occupation['female']:
-        min_value = 'female'
-    elif occupation['male'] <= occupation['female']:
-        min_value = 'male'
-
-    return min_value, min(occupation['male'], occupation['female'])
-
 
 def filtered_male_female(source):
     male_filtered_language = []

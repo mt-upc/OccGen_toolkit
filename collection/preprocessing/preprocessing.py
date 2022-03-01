@@ -26,11 +26,12 @@ def tokenization(sentence, language):
 	elif language == "es":
 		sentences = nltk.sent_tokenize(sentence, language="english")
 	#TODO: requirements
-	elif language == "af":
+	elif language == "ar":
 		sentences=ar_split.corenlp_ssplitter(ar_tokenizer, sentence)
 	#TODO: requirements
 	elif language == "ru":
 		sentences = nltk.sent_tokenize(sentence, language="russian")
+	#todo: handle other languages
 	
 	return sentences
 
