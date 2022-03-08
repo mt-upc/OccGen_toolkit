@@ -57,4 +57,4 @@ dmypy.json
 data/*.json
 data/json/*.json
 data/preprocessing/*/*.txt
-data/mining/*.txt
+data/mining/*/*.txt
