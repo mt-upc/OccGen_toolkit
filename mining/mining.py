@@ -9,8 +9,8 @@ def main(input_path, output_path, folders):
 
 	for i, dir in enumerate(dirs):
 		os.mkdir(output_path + str(i%folders) + "/" + dir)
-		copy_tree(input_path + dir, output_path + str(i%folders) + "/" +dir)  # dst can be a folder; use shutil.copy2() to preserve timestamp
+		copy_tree(input_path + dir, output_path + str(i%folders) + "/" + dir) 
 
-
+# TODO: Manager call
 if __name__ == '__main__':
 	main("../data/preprocessing/", "../data/mining/", 4)
