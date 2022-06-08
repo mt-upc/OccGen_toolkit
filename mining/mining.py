@@ -1,5 +1,7 @@
 from distutils.dir_util import copy_tree
 from distutils.file_util import move_file
+
+import argparse
 import os
 
 def split_into_folders(input_path, output_path, folders):
@@ -24,8 +26,25 @@ def merge_into_folder(input_path, output_path, folders):
 				if file[-3:] == "tsv": # LASER alignment file type 
 					move_file(input_path + str(i) + "/" + dir + "/" + file, output_path + dir) 
 
+def main():
+	ap = argparse.ArgumentParser()
+	
+	ap.add_argument("-o", "--operation", type=str, help="operation to perform: split or merge")
+	ap.add_argument("-p", "--preprocessing_path", type=str, help="path to preprocessing folder")
+	ap.add_argument("-t", "--temporal_path", type=str, help="path to preprocessing folder")
+	ap.add_argument("-a", "--alignment_path", type=str, help="path to alignment folder")
+	ap.add_argument("-f", "--folders", type=int, help="number of folders")
+	
+	args = vars(ap.parse_args())
+	if args["type"] == "split": split_into_folders(args["preprocessing_path"], args["temporal_path"], 4)
+	elif args["type"] == "merge": merge_into_folder(args["temporal_path"], args["alignment_path"], 4)
+	else: print("At mining: Invalid type.")
 
-# TODO: Manager call
+
 if __name__ == '__main__':
-	split_into_folders("../data/preprocessing/", "../data/mining/", 4)
-	merge_into_folder("../data/mining/", "../data/alignment/", 4)
+	main()
+
+
+
+
+

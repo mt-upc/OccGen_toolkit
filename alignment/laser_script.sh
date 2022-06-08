@@ -15,6 +15,10 @@ path_occ='/home/usuaris/veu/christine.raouf.saad/Ge-Bio-Balanced/laser_occ_entit
 langs=("es")
 trg="en"
 
+path="$1"
+langs="$2"
+trg="$3"
+
 
 #####################################################################
 # encoder

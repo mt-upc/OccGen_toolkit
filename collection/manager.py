@@ -3,25 +3,47 @@ from preprocessing.preprocessing import main as preprocessing_main
 from biography.wiki_scraper import main as biography_main
 from information.pipeline import main as information_main
 
-# TODO: Config file or program args provided by global manager (bash)
-# These path might need to mkdir (bash) from the global manager
-occupations_path   = "../data/occupations.json"
-data_path          = "../data/json/"
-entity_links_path  = "../data/languages/entities.json"
-monolingual_path   = "../data/monolingual/"
-preprocessing_path = "../data/preprocessing/"
+import argparse
+import os
 
-# Change to required languages, ISO language code
-languages_list = ["en", "es"]
+def collect(args):
+	print('....Information Extraction of Occupations and Entities....')
+	if not os.path.isdir(occupations_path): os.mkdir(occupations_path)
+	occupations_path += "occupations.json"
+	if not os.path.isdir(information_path): os.mkdir(information_path)
+	information_main(occupations_path, information_path)
 
-print('....Information Extraction of Occupations and Entities....')
-information_main(occupations_path, data_path)
+	print('....Filtering Entities of Languages....')
+	if not os.path.isdir(entity_links_path): os.mkdir(entity_links_path)
+	entity_links_path += "entities.json"
+	languages_main(information_path, languages, entity_links_path)
 
-print('....Filtering Entities of Languages....')
-languages_main(data_path, languages_list, entity_links_path)
+	print('....Extracting the monolingual data....')
+	if not os.path.isdir(monolingual_path): os.mkdir(monolingual_path)
+	biography_main(entity_links_path, monolingual_path)
 
-print('....Extracting the monolingual data....')
-biography_main(entity_links_path, monolingual_path)
+	print('....Preprocessing Monolingual Data....')
+	if not os.path.isdir(preprocessing_path): os.mkdir(preprocessing_path)
+	preprocessing_main(monolingual_path, preprocessing_path)
 
-print('....Preprocessing Monolingual Data....')
-preprocessing_main(monolingual_path, preprocessing_path)
+
+def main():
+	ap = argparse.ArgumentParser()
+	
+	ap.add_argument("-o", "--occupations_path", type=str, help="path to occupations folder")
+	ap.add_argument("-i", "--information_path", type=str, help="path to information folder")
+	ap.add_argument("-e", "--entity_links_path", type=str, help="path to entities folder")
+	ap.add_argument("-m", "--monolingual_path", type=str, help="path to monolingual folder")
+	ap.add_argument("-p", "--preprocessing_path", type=str, help="path to preprocessing folder")
+	ap.add_argument("-l", "--languages", type=list, default=False, help="list of ISO language code")
+	
+	args = vars(ap.parse_args())	
+
+	collect(args)
+
+
+if __name__ == '__main__':
+	main()
+
+
+

@@ -1,5 +1,5 @@
-from information import utils
 import requests
+import utils
 import glob
 
 endpoint_url = "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks/urls&ids="

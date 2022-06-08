@@ -31,7 +31,7 @@ def tokenization(sentence, language):
 	#TODO: requirements
 	elif language == "ru":
 		sentences = nltk.sent_tokenize(sentence, language="russian")
-	#todo: handle other languages
+	#TODO: handle other languages
 	
 	return sentences
 
@@ -48,7 +48,7 @@ def language_detection(sentence, language, text):
 def main(input_path, output_path):
 
 	files = glob.glob(input_path + "*.json")
-	# Creating arabic object
+	# TODO: Creating arabic object
 	# ar_tokenizer = ar_split.CoreNLPTokenizer()
 
 	for file in files:

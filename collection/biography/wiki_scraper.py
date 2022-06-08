@@ -3,21 +3,11 @@ from collections import deque
 from bs4 import BeautifulSoup
 
 import requests
+import utils
 import json
 import time
 import sys
 import re
-
-
-def load_json_file(url):
-	f = open(url,)
-	data = json.load(f)
-	return data
-
-def write_json_2_file(file, data):
-	with open(file, 'w', encoding='utf8') as outfile:
-		json.dump(data, outfile, ensure_ascii=False)
-
 
 # TODO: UTF-8 encoding
 def clean_expression(expresion):
@@ -66,7 +56,7 @@ def get_text(url):
 
 def main(input_path, output_path):
 	# read json file from command line (occ>entity>urls)
-	data = load_json_file(input_path)
+	data = utils.load_json_file(input_path)
 
 	for occupation in data:
 		multi_lingual = {}
@@ -77,7 +67,7 @@ def main(input_path, output_path):
 				text = get_text(language)
 				multi_lingual[entity][language] = text
 		# store json file with occupation (id) as a filename
-		write_json_2_file(output_path + occupation + ".json", multi_lingual)
+		utils.write_json_2_file(output_path + occupation + ".json", multi_lingual)
 
 
 

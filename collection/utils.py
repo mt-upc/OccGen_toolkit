@@ -3,7 +3,6 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import json
 import sys
 
-#TODO: move this file to collection directory
 def read_json(file):
     with open(file) as f:
         json_file = json.load(f)
