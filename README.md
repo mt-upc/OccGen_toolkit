@@ -1,6 +1,8 @@
 # GENOCC
 **GENOCC** is a project to extract bilingual or multilingual parallel data from Wikipedia balanced in gender within occupations.
 
+[:warning: Please, note that **documentation for reproducibility** is currently under construction]
+
 ### Data Collection
 
 The first step in our pipeline is to extract data from Wikidata along Wikipedia. Mainly, we collect a set of people *(from now on entities)*  with their occupation(s), gender, and Wikipedia links in all available languages. Afterwards, the user can decide which languages are of their interest to adapt the monolingual extraction phase to their needs. 
@@ -35,9 +37,17 @@ You can execute the whole **information extraction** step by running: `python3 p
 
 We scrape all the monolingual data from the corresponding Wikipedia biography, only for entities with a link for all of the given languages.
 
-[**TODO**] To make it run...  
+[**TODO**]
 
 #### Preprocessing 
+[**TODO**]
+
+#### Mining + Alignment
+[**TODO**]
+
+#### Balancing
+[**TODO**]
+
 
 
 
