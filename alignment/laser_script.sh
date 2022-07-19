@@ -9,15 +9,15 @@
 #SBATCH -x veuc01
 #SBATCH --output=laser_local_mining_q5_q9
 
-
-path_occ='/home/usuaris/veu/christine.raouf.saad/Ge-Bio-Balanced/laser_occ_entity/'
+# path to data/mining/0 
+path_occ='YOUR_PATH_GOES_HERE'
 #loop on occ path to get entities then on entities to get files
 langs=("es")
 trg="en"
 
 
 #####################################################################
-# encoder
+# encoder path for LASER and model_dir environment variables
 model_dir="${LASER}/models"
 encoder="${model_dir}/bilstm.93langs.2018-12-26.pt"
 bpe_codes="${model_dir}/93langs.fcodes"
