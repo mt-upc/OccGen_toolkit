@@ -29,12 +29,15 @@ def get_languages(wikidata_id):
 def main(data_path):
 	files = glob.glob(data_path + "*.json")
 	for file in files:
-		data = utils.read_json(file)
+		try:
+			data = utils.read_json(file)
 
-		for occupation in data:
-			entities = data[occupation]
-			print(entities)
-			for entity in entities:
-				entities[entity]["languages"] = get_languages(entity)
+			for occupation in data:
+				entities = data[occupation]
+				print(entities)
+				for entity in entities:
+					entities[entity]["languages"] = get_languages(entity)
 
-			utils.write_json_2_file(file, data)
+				utils.write_json_2_file(file, data)
+		except:
+			continue
