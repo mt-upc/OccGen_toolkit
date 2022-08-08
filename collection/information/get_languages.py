@@ -23,7 +23,6 @@ def parse(response, wikidata_id):
 def get_languages(wikidata_id):
 	response = requests.get(endpoint_url + wikidata_id)
 	response_json = response.json()
-	print(response_json)
 	return parse(response_json, wikidata_id)
 
 def main(data_path):
@@ -34,10 +33,10 @@ def main(data_path):
 
 			for occupation in data:
 				entities = data[occupation]
-				print(entities)
 				for entity in entities:
 					entities[entity]["languages"] = get_languages(entity)
 
 				utils.write_json_2_file(file, data)
 		except:
+			print(file)
 			continue
