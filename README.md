@@ -61,7 +61,9 @@ To obtain the alignments do the following steps:
 [**TODO**]
 
 
-### Usecases
+### Data usecases
+All the data is annotated and is ready to be used for evaluation.
+
 **High Resource**: The `data/translations_HR_data.csv` which represents the parallel data of English (en), Spanish (es), Arabic (ar), Russian (ru). 
 
 **Low Resource**: The `data/translations_LR_data.csv` which represents the parallel data of English (en), Swahili (SW).
