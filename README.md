@@ -7,17 +7,17 @@
 
 The first step in our pipeline is to extract data from Wikidata along Wikipedia. Mainly, we collect a set of people *(from now on entities)*  with their occupation(s), gender, and Wikipedia links in all available languages. Afterwards, the user can decide which languages are of their interest to adapt the monolingual extraction phase to their needs. 
 
-[**As of now**] To make it run, we just have to execute the following command from the `/collection` directory - within the file you can modify the configuration:
+To make it run, we just have to execute the following command from the `/collection` directory - within the file you can modify the configuration, e.g. the languages from which the tool has to extract data are defined here in `language_list` variable:
 
 ```bash
 python3 manager.py
 ```
 
-[**TODO**] To make it run, we just have to execute the following command after configuring `config.json` file with the corresponding paths (*if default configuration isn't desired*):
+The output of the data can be find in the following directories:
+* `data/json` <--- Information extraction
+* `data/monolingual` <--- Entity Biography Scraping
+* `data/preprocessing` <--- Preprocessing
 
-```bash
-sh manager.sh
-```
 
 The following explains how to taylor and run each part of the project individually.
 
@@ -31,19 +31,31 @@ The following explains how to taylor and run each part of the project individual
 
 You can execute the whole **information extraction** step by running: `python3 pipeline.py`.
 
-#### Language and Gender specification
-
 #### Entity Biography Scraping
 
 We scrape all the monolingual data from the corresponding Wikipedia biography, only for entities with a link for all of the given languages.
 
-[**TODO**]
-
 #### Preprocessing 
-[**TODO**]
+
+We clean and split sentences, run language detection and remove duplicates.
 
 #### Mining + Alignment
-[**TODO**]
+We perform the sentences embeddings of each language independently and compute the candidates sentences between a source and target language on each entity individually. Then, the final data set is obtained from a multilingual alignment.
+
+To obtain the alignments do the following steps:
+
+* Go to `mining/` directory
+* Comment merge_into_folder function call in main body (line 31) from `mining.py`
+* Run `python3 mining.py` to obtain several folders to run in parallel the following step
+* Go to `alignment/` directory
+* In laser_script.sh specify:
+  * path_occ variable; where previous execution stored the data `data/mining/0...n` 
+  * model_dir; where your LASER model is in your server
+* Run `sh laser_script.sh` as many times as configurations.
+* Go back to `mining/` directory
+* Comment split_into_folders function call in main body (line 30) from `mining.py`
+* Uncomment merge_into_folder function call in main body (line 31) from `mining.py`
+* Run `python3 mining.py` to obtain a merged folder with all the parallel aligned data at `data/alignment`
 
 #### Balancing
 [**TODO**]
