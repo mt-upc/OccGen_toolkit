@@ -39,7 +39,7 @@ We scrape all the monolingual data from the corresponding Wikipedia biography, o
 
 We clean and split sentences, run language detection and remove duplicates.
 
-#### Mining + Alignment
+#### Mining and Alignment
 We perform the sentences embeddings of each language independently and compute the candidates sentences between a source and target language on each entity individually. Then, the final data set is obtained from a multilingual alignment.
 
 To obtain the alignments do the following steps:
@@ -61,7 +61,9 @@ To obtain the alignments do the following steps:
 [**TODO**]
 
 
-
+### Usecases
+**High Resource**: The translations_HR_data.csv which represents the parallel data of EN, ES, AR, RU. 
+**Low Resource**: The translations_LR_data.csv which represents the parallel data of EN, SW.
 
 ### Requirements
 
