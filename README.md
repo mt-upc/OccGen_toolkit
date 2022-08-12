@@ -62,9 +62,9 @@ To obtain the alignments do the following steps:
 
 
 ### Usecases
-**High Resource**: The translations_HR_data.csv which represents the parallel data of EN, ES, AR, RU. 
+**High Resource**: The `data/translations_HR_data.csv` which represents the parallel data of English (en), Spanish (es), Arabic (ar), Russian (ru). 
 
-**Low Resource**: The translations_LR_data.csv which represents the parallel data of EN, SW.
+**Low Resource**: The `data/translations_LR_data.csv` which represents the parallel data of English (en), Swahili (SW).
 
 ### Requirements
 
