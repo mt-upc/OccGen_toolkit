@@ -33,8 +33,13 @@ def compute_lang_stats(occupations):
     for occupation in occupations:
         entities = occupations[occupation]
         for entity in entities:
-            languages = occupations[occupation][entity]['languages']
-            gender = occupations[occupation][entity]['gender']
+            if "languages" not in occupations[occupation][entity].keys():
+                languages = []
+                gender = ""
+                print(occupation, entity)
+            else:
+                languages = occupations[occupation][entity]['languages']
+                gender = occupations[occupation][entity]['gender']
             entities_info[entity] = occupations[occupation][entity]
             for language in languages:
                 ln = language[0]

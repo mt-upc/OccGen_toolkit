@@ -128,7 +128,8 @@ def get_languages_specified_output(occ_path, list_languages):
                 # this is to keep track of the number of entities in the occupation
                 occ_entities_numbers[occ] = len(intersection)
                 for entity in intersection:
-                    gender = entities_info_all[entity]['gender']
+                    gender = ""
+                    if "gender" in entities_info_all[entity].keys(): gender = entities_info_all[entity]['gender']
                     if gender in occ_entities_common_genders[occ]:
                         occ_entities_common_genders[occ][gender] += 1
                     else:

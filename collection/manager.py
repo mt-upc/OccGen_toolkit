@@ -12,10 +12,10 @@ monolingual_path   = "../data/monolingual/"
 preprocessing_path = "../data/preprocessing/"
 
 # Change to required languages, ISO language code
-languages_list = ["en", "es"]
+languages_list = ["en", "ru"]
 
 print('....Information Extraction of Occupations and Entities....')
-information_main(occupations_path, data_path)
+#information_main(occupations_path, data_path)
 
 print('....Filtering Entities of Languages....')
 languages_main(data_path, languages_list, entity_links_path)

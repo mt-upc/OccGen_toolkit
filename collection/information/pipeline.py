@@ -5,10 +5,10 @@ from information import get_gender as Gender
 
 def main(occupations_path, output_path):
 	print("Extracting Occupations...")
-	Occupations.main(occupations_path)
+	#Occupations.main(occupations_path)
 
 	print("Extracting Entities...")
-	Entities.main(occupations_path, output_path)
+	#Entities.main(occupations_path, output_path)
 
 	print("Extracting Languages...")
 	Languages.main(output_path)
