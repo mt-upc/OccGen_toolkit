@@ -81,12 +81,14 @@ def get_entities_links(list_languages_wiki, occ_entities, entities_info, write_p
     for occ in occ_entities:
         occ_entity_ln[occ] = {}
         for entity in occ_entities[occ]:
-            languages = entities_info[entity]['languages']
-            link_list = []
-            for ln in languages:
-                if ln[0] in list_languages_wiki:
-                    link_list.append(ln[1])
-            occ_entity_ln[occ][entity] = link_list
+            if "languages" in entities_info[entity].keys(): 
+                languages = entities_info[entity]['languages']
+                link_list = []
+                for ln in languages:
+                    if ln[0] in list_languages_wiki:
+                        link_list.append(ln[1])
+                occ_entity_ln[occ][entity] = link_list
+                
     utils.write_json_2_file(write_path, occ_entity_ln)
 
 
