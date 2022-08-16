@@ -58,8 +58,9 @@ To obtain the alignments do the following steps:
 * Run `python3 mining.py` to obtain a merged folder with all the parallel aligned data at `data/alignment`
 
 #### Balancing
-[**TODO**]
+We aim to obtain a balanced dataset that will contain the same number of sentences per gender within an occupation.
 
+To obtain the balancing run the following script: `[mining] python3 mappings.py` - it will take data from `data/json/` and `data/alignment/`
 
 ### Data usecases
 All the data is annotated and is ready to be used for evaluation.
