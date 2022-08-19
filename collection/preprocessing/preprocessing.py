@@ -5,6 +5,11 @@ import nltk
 import sys
 import os
 import re
+import languages_requirements.arabic_splitter as ar_split
+
+# Creating global arabic object
+ar_tokenizer = ar_split.CoreNLPTokenizer()
+
 
 def read_json(file):
 	with open(file) as f:
@@ -48,9 +53,8 @@ def language_detection(sentence, language, text):
 def main(input_path, output_path):
 
 	files = glob.glob(input_path + "*.json")
-	# Creating arabic object
-	# ar_tokenizer = ar_split.CoreNLPTokenizer()
 
+	print(files)
 	for file in files:
 		occupation = read_json(file)
 
