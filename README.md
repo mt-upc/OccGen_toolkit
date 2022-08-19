@@ -44,17 +44,16 @@ We perform the sentences embeddings of each language independently and compute t
 
 To obtain the alignments do the following steps:
 
-* Go to `mining/` directory
-* Comment merge_into_folder function call in main body (line 31) from `mining.py`
-* Run `python3 mining.py` to obtain several folders to run in parallel the following step
 * Go to `alignment/` directory
+* Run the python script mining.py to create number of splits of the entities, to run multiple laser commands on these splits:
+example of usage: mining.py --src=IN_FILE --target=OUT_FILE --no_splits=10 --split=1
+no_splits is no of splits demanded, specify 1 for split argument for splitting the files to folders, 0 for merge them later to use later
 * In laser_script.sh specify:
   * path_occ variable; where previous execution stored the data `data/mining/0...n` 
   * model_dir; where your LASER model is in your server
 * Run `sh laser_script.sh` as many times as configurations.
-* Go back to `mining/` directory
-* Comment split_into_folders function call in main body (line 30) from `mining.py`
-* Uncomment merge_into_folder function call in main body (line 31) from `mining.py`
+* Now merge step is needed, run the same previous command with split=0
+example: mining.py --src=IN_FILE --target=OUT_FILE --no_splits=10 --split=0
 * Run `python3 mining.py` to obtain a merged folder with all the parallel aligned data at `data/alignment`
 
 #### Balancing
