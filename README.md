@@ -46,8 +46,8 @@ To obtain the alignments do the following steps:
 
 * Go to `alignment/` directory
 * Run the python script mining.py to create number of splits of the entities, to run multiple laser commands on these splits:
-example of usage: mining.py --src=IN_FILE --target=OUT_FILE --no_splits=10 --split=1
-no_splits is no of splits demanded, specify 1 for split argument for splitting the files to folders, 0 for merge them later to use later
+  * example of usage: mining.py --src=IN_FILE --target=OUT_FILE --no_splits=10 --split=1
+  * no_splits is no of splits demanded, specify 1 for split argument for splitting the files to folders, 0 for merge them later to use later
 * In laser_script.sh specify:
   * path_occ variable; where previous execution stored the data `data/mining/0...n` 
   * model_dir; where your LASER model is in your server
