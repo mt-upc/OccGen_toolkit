@@ -94,4 +94,66 @@ def extract_min_sentences(data, minimum):
     return min_sentences
 
 def main(occupations_path, alignment_path):
-    o
+    occupations_info = occupations_merge(occupations_path, alignment_path)
+
+    occupations_per_entity = {}
+    entity_alignment = {}
+    entity_gender = {}
+
+    for occupation in occupations_info.keys():
+        for gender in occupations_info[occupation].keys():
+            for entity in occupations_info[occupation][gender]:
+                entity_alignment[entity] = occupations_info[occupation][gender][entity]
+                entity_gender[entity] = gender
+                if entity not in occupations_per_entity.keys():
+                    occupations_per_entity[entity] = [occupation]
+                else:
+                    occupations_per_entity[entity].append(occupation)
+
+    print(occupations_per_entity)
+    occupations_hierarchy = {}
+
+    for entity in occupations_per_entity.keys():
+        gender = entity_gender[entity]
+        size = len(occupations_per_entity[entity])
+        if size not in occupations_hierarchy.keys():
+            occupations_hierarchy[size] = {}
+        print(entity)
+        occupation = occupations_per_entity[entity]
+        occupation.sort()
+        occupation = " ".join(occupation)
+        print(occupation)
+        if occupation not in occupations_hierarchy[size].keys():
+            occupations_hierarchy[size][occupation] = {"male":{},"female":{}}
+        occupations_hierarchy[size][occupation][gender] = {entity:entity_alignment[entity]}
+
+    balanced_data = {}
+    for occ_num in occupations_hierarchy:
+        for occ_id in occupations_hierarchy[occ_num]:
+            print("occ id:", occ_id)
+            genders = occupations_hierarchy[occ_num][occ_id]
+            male_entities = len(genders["male"].keys())
+            female_entities = len(genders["female"].keys())
+            min_entities = min(male_entities, female_entities)
+            male = extract_min_entities(genders["male"], min_entities)
+            print("male:", male, len(male))
+            female = extract_min_entities(genders["female"], min_entities)
+            print("female:", female, len(female))
+            if len(female) == 0: continue
+            male_sentences = 0
+            for entity in male:
+                male_sentences += len(entity[1])
+            female_sentences = 0
+            for entity in female:
+                female_sentences += len(entity[1])
+            min_sentences = min(male_sentences, female_sentences)
+            male_sentences = extract_min_sentences(male, min_sentences)
+            print(male_sentences)
+            female_sentences = extract_min_sentences(female, min_sentences)
+            print(female_sentences)
+            balanced_data[occ_id] = {"female": female_sentences, "male":male_sentences}
+
+    print(balanced_data)
+
+if __name__ == '__main__':
+    main("../data/json/", "../data/alignment/")
