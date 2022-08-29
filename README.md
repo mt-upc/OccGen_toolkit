@@ -64,7 +64,7 @@ To obtain the balancing run the following script: `[mining] python3 mappings.py`
 ### Data usecases
 All the data is annotated and is ready to be used for evaluation.
 
-**High Resource**: The `data/translations_HR_data.csv` which represents the parallel data of English (en), Spanish (es), Arabic (ar), Russian (ru). 
+**High Resource**: The `data/translations_HR_data.csv` which represents the parallel data of English (en), Spanish (es), Arabic (ar), Russian (ru). The human evaluation of each language pair can be found in the same directory `data/human_evaluation_*.csv`.
 
 **Low Resource**: The `data/translations_LR_data.csv` which represents the parallel data of English (en), Swahili (SW).
 
