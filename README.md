@@ -76,6 +76,11 @@ En-Es 1M: https://drive.google.com/file/d/1wahfqTiEgD89wHqnZuq2X4syDk15EgTz/view
 
 En-Ru 433k:https://drive.google.com/file/d/16KnpUWtbCkoXOEIwUJKFuYqK8woQPZDg/view?usp=sharing
 
+**Gender distribution** in our training data can be seen in the below heatmap:
+![heatmap_genders](./static/img/heatmap_genders.png)
+
+Gender definitions extracted from **Wikipedia**.
+
 ### Requirements
 
 All steps requires **Python >= 3.6**. One can install all requiremets executing:
